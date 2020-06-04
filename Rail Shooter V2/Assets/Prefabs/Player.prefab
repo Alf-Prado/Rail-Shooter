@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5916366858905224270}
   - component: {fileID: 5916366858905224241}
+  - component: {fileID: 3400939800048410012}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,6 +137,20 @@ MonoBehaviour:
   dolly: {fileID: 0}
   cameraParent: {fileID: 0}
   rearView: {fileID: 0}
+--- !u!64 &3400939800048410012
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5916366858905224271}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &5526856770218352222
 PrefabInstance:
   m_ObjectHideFlags: 0
