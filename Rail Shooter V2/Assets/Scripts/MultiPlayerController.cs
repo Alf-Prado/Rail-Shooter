@@ -13,6 +13,7 @@ using Cinemachine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MultiPlayerController : NetworkBehaviour
 {
@@ -53,6 +54,7 @@ public class MultiPlayerController : NetworkBehaviour
     [Space]
 
     private FSM fsm;
+    private FSM2 fsm2;
 
     [Space]
     //Player fire rate
@@ -68,6 +70,7 @@ public class MultiPlayerController : NetworkBehaviour
     {
         gameObject.transform.SetParent(GameObject.Find("GameController").GetComponent<Transform>());
         fsm = GameObject.Find("FSM").GetComponent<FSM>();
+        fsm2 = GameObject.Find("FSM2").GetComponent<FSM2>();
 
         rearView = GameObject.Find("RearView");
 
@@ -115,12 +118,59 @@ public class MultiPlayerController : NetworkBehaviour
 
     void Update()
     {
+        if(isServer)
+        {
+            //FSM
+            Vector3 my3DPos = transform.position;
+
+            Vector3 myTexturePos = new Vector3((my3DPos.x + 400.0f) * 512.0f / 800.0f, my3DPos.y, (my3DPos.z + 100.0f) * 512.0f / 200.0f);
+
+            for (int y = 0; y < fsm.texture.height; y++)
+            {
+                for (int x = 0; x < fsm.texture.width; x++)
+                {
+                    Vector2 vTemp = new Vector2(myTexturePos.x - x, myTexturePos.z - y);
+                    vTemp.Normalize();
+                    Color color = Color.black;
+                    color.r = vTemp.x;
+                    color.g = myTexturePos.y;
+                    color.b = vTemp.y;
+                    fsm.texture.SetPixel(x, y, color);
+
+                }
+            }
+            fsm.texture.Apply();
+        }
+        else
+        {
+            //FSM2
+            Vector3 my3DPos = transform.position;
+
+            Vector3 myTexturePos = new Vector3((my3DPos.x + 400.0f) * 512.0f / 800.0f, my3DPos.y, (my3DPos.z + 100.0f) * 512.0f / 200.0f);
+
+            for (int y = 0; y < fsm2.texture.height; y++)
+            {
+                for (int x = 0; x < fsm2.texture.width; x++)
+                {
+                    Vector2 vTemp = new Vector2(myTexturePos.x - x, myTexturePos.z - y);
+                    vTemp.Normalize();
+                    Color color = Color.black;
+                    color.r = vTemp.x;
+                    color.g = myTexturePos.y;
+                    color.b = vTemp.y;
+                    fsm2.texture.SetPixel(x, y, color);
+
+                }
+            }
+            fsm2.texture.Apply();
+        }
+
         if (!isLocalPlayer)
         {
             return;
         }
-        
-        if(rearView == null)
+
+        if (rearView == null)
         {
             Debug.Log("Searching for rear view");
             rearView = GameObject.Find("RearView");
@@ -170,27 +220,18 @@ public class MultiPlayerController : NetworkBehaviour
             CmdShootBullet();
         }
 
-        //FSM
-        Vector3 my3DPos = transform.position;
-
-        Vector3 myTexturePos = new Vector3((my3DPos.x + 400.0f) * 512.0f / 800.0f, my3DPos.y, (my3DPos.z + 100.0f) * 512.0f / 200.0f);
-
-        for (int y = 0; y < fsm.texture.height; y++)
+        // Debug.Log(playerModel.transform.position.x);
+        if (playerModel.transform.position.x <= -370)
         {
-            for (int x = 0; x < fsm.texture.width; x++)
-            {
-                Vector2 vTemp = new Vector2(myTexturePos.x - x, myTexturePos.z - y);
-                vTemp.Normalize();
-                Color color = Color.black;
-                color.r = vTemp.x;
-                color.g = myTexturePos.y;
-                color.b = vTemp.y;
-                fsm.texture.SetPixel(x, y, color);
-
-            }
+            Debug.Log("Completed!");
+            ChangeScene("WinScene");
         }
-        fsm.texture.Apply();
 
+    }
+
+    public void ChangeScene(string scene_name)
+    {
+        SceneManager.LoadScene(scene_name);
     }
 
     public bool CanAttack
@@ -257,11 +298,13 @@ public class MultiPlayerController : NetworkBehaviour
         //If health is equal or lower to 0, the player dies
         if (health <= 0)
         {
+            Destroy(playerModel);
+            Debug.Log("Defeated!");
+            ChangeScene("LoseScene");
             
-            Destroy(gameObject);
-           
+
             //CustomNetworkManager.singleton.StopClient();
-            
+
         }
         
     }

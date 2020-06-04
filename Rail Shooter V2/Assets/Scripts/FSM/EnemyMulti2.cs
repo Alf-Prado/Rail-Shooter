@@ -5,13 +5,13 @@ using UnityEngine.Networking;
 
 public class EnemyMulti2 : NetworkBehaviour
 {
-    FSM fsm;
+    FSM2 fsm;
     float smoothTime = 0.3f;
     float yVelocity = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
-        fsm = GameObject.Find("FSM2").GetComponent<FSM>();
+        fsm = GameObject.Find("FSM2").GetComponent<FSM2>();
     }
 
     // Update is called once per frame

@@ -9,8 +9,8 @@ public class AsteroidSpawnerMulti : NetworkBehaviour
     public GameObject asteroid1;
     public GameObject asteroid2;
     public GameObject asteroid3;
-    int instances = 250;
-    float radius = 400.0f;
+    int instances = 2000;
+    float radius = 600.0f;
     
 
     // Start is called before the first frame update
