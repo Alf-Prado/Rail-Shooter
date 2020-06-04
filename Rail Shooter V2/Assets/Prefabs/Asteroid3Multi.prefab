@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 5502223159054313187}
   - component: {fileID: 4288265021286553484}
   - component: {fileID: -1426131282197030064}
+  - component: {fileID: -3595237973434248557}
   m_Layer: 0
   m_Name: Asteroid3Multi
   m_TagString: Untagged
@@ -766,6 +767,19 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!135 &-3595237973434248557
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7505234600962774503}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7615616930278063411
 GameObject:
   m_ObjectHideFlags: 0

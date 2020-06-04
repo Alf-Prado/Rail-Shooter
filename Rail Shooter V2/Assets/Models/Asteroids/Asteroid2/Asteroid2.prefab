@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7188474745164451085}
   - component: {fileID: 3382757510310294556}
   - component: {fileID: 350184387858965483}
+  - component: {fileID: -9116468211137428354}
   m_Layer: 0
   m_Name: Asteroid2
   m_TagString: Untagged
@@ -106,6 +107,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &-9116468211137428354
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737843840566802731}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1544207242575901312
 GameObject:
   m_ObjectHideFlags: 0
