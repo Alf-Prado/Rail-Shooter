@@ -7,10 +7,12 @@ public class Enemy : MonoBehaviour
     FSM fsm;
     float smoothTime = 0.3f;
     float yVelocity = 0.0f;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         fsm = GameObject.Find("FSM").GetComponent<FSM>();
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,6 +41,7 @@ public class Enemy : MonoBehaviour
         //If player is not null, it takes damage
         if (player != null)
         {
+            audio.Play();
             player.IsDamaged(25);
             Destroy(gameObject);
         }

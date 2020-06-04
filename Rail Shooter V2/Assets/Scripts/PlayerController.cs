@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public Transform bulletSpawnLeftPosition;
     public Transform bulletSpawnRightPosition;
     Transform bulletSpawnPosition;
+    AudioSource audio;
 
     void Start()
     {
@@ -70,6 +71,8 @@ public class PlayerController : MonoBehaviour
         fsm = GameObject.Find("FSM").GetComponent<FSM>();
 
         shootCooldown = 0;
+
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -149,6 +152,7 @@ public class PlayerController : MonoBehaviour
     void ShootBullet()
     {
         float velocity;
+        audio.Play();
 
         //Spawn the bullet
         if (rearView.activeSelf == true)

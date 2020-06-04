@@ -5,10 +5,11 @@ using UnityEngine.Networking;
 
 public class BulletMulti : NetworkBehaviour
 {
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class BulletMulti : NetworkBehaviour
         //If enemy is not null, it takes damage
         if (enemy != null)
         {
+            audio.Play();
             Debug.Log("Enemy Destroyed");
             Destroy(enemy);
             Destroy(gameObject);
