@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 {
     private Transform playerModel;
     
-    public int health = 10;
+    public int health = 100;
     public RectTransform healthBar;
 
     [Header("Settings")]
@@ -197,6 +197,9 @@ public class PlayerController : MonoBehaviour
         health -= damage;
 
         Debug.Log("Health " + health);
+        if(health <= 0){
+            ChangeScene("LoseScene");
+        }
         ChangeHealth(health);
         //If health is equal or lower to 0, the player dies
         if (health <= 0)
@@ -212,7 +215,7 @@ public class PlayerController : MonoBehaviour
 
     void ChangeHealth(int health)
     {
-        healthBar.sizeDelta = new Vector2(health * 20, healthBar.sizeDelta.y);
+        healthBar.sizeDelta = new Vector2(health * 2, healthBar.sizeDelta.y);
     }
 
     void LocalMove(float x, float y, float speed)
