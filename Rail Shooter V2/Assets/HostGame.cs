@@ -44,7 +44,11 @@ public class HostGame : MonoBehaviour
     void Update()
     {
         if(nm.numPlayers >= 2){
-            buttonStart.SetActive(true);
+            if (buttonStart != null)
+            {
+                buttonStart.SetActive(true);
+            }
+            
         }
     }
 }

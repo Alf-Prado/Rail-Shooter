@@ -1538,7 +1538,7 @@ GameObject:
   - component: {fileID: 890197909}
   - component: {fileID: 890197911}
   - component: {fileID: 890197910}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2294,7 +2294,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 900}
+  m_SizeDelta: {x: 2000, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1219770355
 MonoBehaviour:
@@ -2343,7 +2343,7 @@ GameObject:
   - component: {fileID: 1311883705}
   - component: {fileID: 1311883707}
   - component: {fileID: 1311883706}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2690,7 +2690,7 @@ GameObject:
   - component: {fileID: 1524995096}
   - component: {fileID: 1524995095}
   - component: {fileID: 1524995094}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2811,7 +2811,7 @@ GameObject:
   - component: {fileID: 1608142820}
   - component: {fileID: 1608142825}
   - component: {fileID: 1608142826}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: LobbyNetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2850,7 +2850,12 @@ MonoBehaviour:
   - {fileID: 737843840566802731, guid: e63a22844ae8d63479b60aff1cd7a577, type: 3}
   - {fileID: 7505234600962774503, guid: 08ff49b33dd8dce42a0e46a9ce144b18, type: 3}
   - {fileID: 3803598001353614810, guid: 063fd6dac207ef347a448876b6daaee7, type: 3}
-  m_CustomConfig: 1
+  - {fileID: 1565332363999750838, guid: b8d8d5419a968c94cad4295b4b3b207b, type: 3}
+  - {fileID: 7132683381648928917, guid: d6f4f273fdc260a47852759557b715e4, type: 3}
+  - {fileID: 7068157596949520202, guid: 5c06e5482ac593d4e9c67eaf71e1e95e, type: 3}
+  - {fileID: 1494614756776376434, guid: dbd2f32ff554db645bb51c9f50c282e5, type: 3}
+  - {fileID: 8326498336475438720, guid: 308420c4c13aa6449b8caa931a86dc23, type: 3}
+  m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1440
@@ -2905,10 +2910,10 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  m_ShowLobbyGUI: 1
+  m_ShowLobbyGUI: 0
   m_MaxPlayers: 2
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 2
+  m_MinPlayers: 1
   m_LobbyPlayerPrefab: {fileID: 8235824462214584918, guid: 81db007aa9d3d7a4fa109b239acbc0b6,
     type: 3}
   m_GamePlayerPrefab: {fileID: 5916366858905224271, guid: 26d19f91c951f7c448543145b44756de,
@@ -3010,7 +3015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
-  showGUI: 1
+  showGUI: 0
   offsetX: 0
   offsetY: 0
 --- !u!114 &1608142826
@@ -3082,7 +3087,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Host new game
+  m_text: Host New Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3250,7 +3255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Start Game!
 --- !u!222 &1617313851
 CanvasRenderer:
   m_ObjectHideFlags: 0

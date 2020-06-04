@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - JoinComponent
+  - HostGame
+  - WaitingText
+  - ButtonStart
   layers:
   - Default
   - TransparentFX
@@ -18,10 +22,10 @@ TagManager:
   - 
   - 
   - 
+  - Bullet
   - 
   - 
-  - 
-  - 
+  - Player
   - 
   - 
   - 

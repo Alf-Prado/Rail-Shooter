@@ -18,7 +18,7 @@ public class MultiPlayerController : NetworkBehaviour
 {
     private Transform playerModel;
 
-    [SyncVar (hook = "ChangeHealth")] public int health = 10;
+    [SyncVar (hook = "ChangeHealth")] public int health = 100;
     public RectTransform healthBar;
 
     [Header("Settings")]
@@ -41,7 +41,8 @@ public class MultiPlayerController : NetworkBehaviour
 
     [Space]
 
-    GameObject rearView;
+    public GameObject rearView;
+    bool rearIsActive;
 
     [Space]
 
@@ -68,12 +69,7 @@ public class MultiPlayerController : NetworkBehaviour
         gameObject.transform.SetParent(GameObject.Find("GameController").GetComponent<Transform>());
         fsm = GameObject.Find("FSM").GetComponent<FSM>();
 
-        // Info from C# (CPU) into de Shader (GPU)
-        MaterialPropertyBlock propsBody = new MaterialPropertyBlock();
-
-        propsBody.SetColor("_Color", new Color(235 / 255f, 125 / 255f, 52 / 255f));
-        bodyRenderer = bodyObj.GetComponent<MeshRenderer>();
-        bodyRenderer.SetPropertyBlock(propsBody);
+        rearView = GameObject.Find("RearView");
 
         if (!isLocalPlayer)
         {
@@ -85,28 +81,63 @@ public class MultiPlayerController : NetworkBehaviour
             bodyRenderer.SetPropertyBlock(propsBodyOther);
             return;
         }
+        
+    }
 
-        shootCooldown = 0;
+    public override void OnStartServer()
+    {
+        rearView = GameObject.Find("RearView");
+        rearIsActive = false;
+    }
+
+    public override void OnStartLocalPlayer()
+    {
 
         rearView = GameObject.Find("RearView");
+        // Info from C# (CPU) into de Shader (GPU)
+        MaterialPropertyBlock propsBody = new MaterialPropertyBlock();
+
+        propsBody.SetColor("_Color", new Color(235 / 255f, 125 / 255f, 52 / 255f));
+        bodyRenderer = bodyObj.GetComponent<MeshRenderer>();
+        bodyRenderer.SetPropertyBlock(propsBody);
+        shootCooldown = 0;
 
         aimTarget = GameObject.Find("AimTarget").GetComponent<Transform>();
         dollyGameObject = GameObject.Find("GameController");
         dolly = GameObject.Find("GameController").GetComponent<CinemachineDollyCart>();
-        cameraParent = GameObject.Find("CameraHolder").transform;    
+        cameraParent = GameObject.Find("CameraHolder").transform;
 
         playerModel = transform.GetChild(0);
         SetSpeed(forwardSpeed);
-        rearView.SetActive(false);
+        rearIsActive = false;
+        //rearView.SetActive(true);
     }
 
     void Update()
     {
-        if(!isLocalPlayer)
+        if (!isLocalPlayer)
         {
             return;
         }
         
+        if(rearView == null)
+        {
+            Debug.Log("Searching for rear view");
+            rearView = GameObject.Find("RearView");
+        }
+        else
+        {
+            if (rearIsActive)
+            {
+                rearView.SetActive(true);
+            }
+            else
+            {
+                rearView.SetActive(false);
+            }
+        }
+       
+
         float h = joystick ? Input.GetAxis("Horizontal") : Input.GetAxis("Mouse X");
         float v = joystick ? Input.GetAxis("Vertical") : Input.GetAxis("Mouse Y");
 
@@ -116,13 +147,13 @@ public class MultiPlayerController : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (rearView.activeSelf)
+            if (rearIsActive)
             {
-                rearView.SetActive(false);
+                rearIsActive = false;
             }
             else
             {
-                rearView.SetActive(true);
+                rearIsActive = true;
             }
         }
 
@@ -176,9 +207,8 @@ public class MultiPlayerController : NetworkBehaviour
     void CmdShootBullet()
     {
         float velocity;
-
-        //Spawn the bullet
-        if (rearView.activeSelf == true)
+        
+        if (rearIsActive)
         {
             velocity = -30f;
         }
@@ -238,7 +268,7 @@ public class MultiPlayerController : NetworkBehaviour
 
     void ChangeHealth(int health)
     {
-        healthBar.sizeDelta = new Vector2(health * 20, healthBar.sizeDelta.y);
+        healthBar.sizeDelta = new Vector2(health * 2, healthBar.sizeDelta.y);
     }
 
     void LocalMove(float x, float y, float speed)
