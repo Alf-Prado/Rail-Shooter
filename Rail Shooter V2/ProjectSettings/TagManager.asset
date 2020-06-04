@@ -9,6 +9,13 @@ TagManager:
   - WaitingText
   - ButtonStart
   - FinishLine
+  - Asteroid
+  - Cable
+  - BrokePanel
+  - Capsule
+  - HalfCapsule
+  - Antenna
+  - Mine
   layers:
   - Default
   - TransparentFX

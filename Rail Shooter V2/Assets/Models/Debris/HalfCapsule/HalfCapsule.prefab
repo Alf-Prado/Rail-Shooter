@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 3842767663971129899}
   m_Layer: 0
   m_Name: HalfCapsule
-  m_TagString: Untagged
+  m_TagString: HalfCapsule
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
