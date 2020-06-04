@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 745407759407587544}
   - component: {fileID: 7619894851913701572}
   - component: {fileID: 3194080352856741469}
+  - component: {fileID: 8311108582861074619}
   m_Layer: 0
   m_Name: BrokenPanels
   m_TagString: Untagged
@@ -426,3 +427,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &8311108582861074619
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7132683381648928917}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 0, z: 0}
