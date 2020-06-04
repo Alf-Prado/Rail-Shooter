@@ -28,7 +28,7 @@ public class DamagingObject : MonoBehaviour
             player.IsDamaged(damage);
             
         }
-        audio.Play();
+        //audio.Play();
         Destroy(gameObject);
 
     }
