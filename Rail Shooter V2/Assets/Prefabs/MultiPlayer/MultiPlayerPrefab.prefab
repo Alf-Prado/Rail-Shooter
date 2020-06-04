@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5aac279ca842514f8284f64659b2a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
   healthBar: {fileID: 66602455495015696}
   joystick: 1
   xySpeed: 18

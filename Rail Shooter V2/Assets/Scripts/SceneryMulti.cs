@@ -26,7 +26,7 @@ public class SceneryMulti : NetworkBehaviour
         //If player is not null, it takes damage
         if (player != null)
         {
-            audio.Play();
+            //audio.Play();
             player.IsDamaged(damage);
             Destroy(gameObject);
         }
