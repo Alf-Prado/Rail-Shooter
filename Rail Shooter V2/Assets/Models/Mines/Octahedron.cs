@@ -53,7 +53,7 @@ public class Octahedron : MonoBehaviour
         meshFilter.mesh.triangles = myMesh.faces.ToArray();
         meshFilter.mesh.RecalculateNormals(); 
 
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 4; i++){
             meshFilter = gameObject.GetComponent<MeshFilter>();
             myMesh = TessellateMesh(myMesh);
             meshFilter.mesh.vertices = myMesh.points.ToArray();
