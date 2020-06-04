@@ -31,4 +31,17 @@ public class Enemy : MonoBehaviour
         transform.position = my3DPos;
         
     }
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+        //If player is not null, it takes damage
+        if (player != null)
+        {
+            player.IsDamaged(2);
+        }
+
+        Destroy(gameObject);
+    }
 }

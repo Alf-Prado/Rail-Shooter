@@ -11,10 +11,14 @@ using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private Transform playerModel;
+    
+    public int health = 10;
+    public RectTransform healthBar;
 
     [Header("Settings")]
     public bool joystick = true;
@@ -37,7 +41,25 @@ public class PlayerController : MonoBehaviour
 
     public GameObject rearView;
 
+    // [Space]
+
+    // public GameObject bodyObj;
+
+    // MeshRenderer bodyRenderer;
+
+    [Space]
+
     private FSM fsm;
+
+    [Space]
+    //Player fire rate
+    protected float fireRate = 0.20f;
+    private double shootCooldown;
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnLeftPosition;
+    public Transform bulletSpawnRightPosition;
+    Transform bulletSpawnPosition;
 
     void Start()
     {
@@ -46,6 +68,8 @@ public class PlayerController : MonoBehaviour
         rearView.SetActive(false);
 
         fsm = GameObject.Find("FSM").GetComponent<FSM>();
+
+        shootCooldown = 0;
     }
 
     void Update()
@@ -64,6 +88,19 @@ public class PlayerController : MonoBehaviour
                 rearView.SetActive(true);
             }
             
+        }
+
+        //Check if player can shoot
+        if (shootCooldown > 0)
+        {
+            shootCooldown -= Time.deltaTime;
+        }
+
+        //If spacebar is hit, we shoot a bullet
+        if (Input.GetKeyDown(KeyCode.Space) && CanAttack)
+        {
+            shootCooldown = fireRate;
+            ShootBullet();
         }
 
         Vector3 my3DPos = transform.position;
@@ -86,7 +123,96 @@ public class PlayerController : MonoBehaviour
         }
         fsm.texture.Apply();
 
+        // Debug.Log(playerModel.transform.position.x);
+        if(playerModel.transform.position.x <= -370){
+            Debug.Log("Completed!");
+            ChangeScene("WinScene");
+        }
 
+
+    }
+
+    public void ChangeScene(string scene_name){
+        SceneManager.LoadScene(scene_name);
+    }
+
+    public bool CanAttack
+    {
+        //Check if the player can shoot by checking if the cooldwon has finished
+        get
+        {
+            return shootCooldown <= 0;
+        }
+    }
+
+    //Method to shoot a bullet
+    void ShootBullet()
+    {
+        float velocity;
+
+        //Spawn the bullet
+        if (rearView.activeSelf == true)
+        {
+            velocity = -30f;
+        }
+        else
+        {
+            velocity = 30f;
+        }
+
+        if (bulletSpawnPosition == null)
+        {
+            bulletSpawnPosition = bulletSpawnLeftPosition;
+        }
+
+        GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawnPosition.position, bulletSpawnPosition.rotation);
+
+        if (bulletSpawnPosition == bulletSpawnLeftPosition)
+        {
+            bulletSpawnPosition = bulletSpawnRightPosition;
+        }
+        else
+        {
+            bulletSpawnPosition = bulletSpawnLeftPosition;
+        }
+
+        //Give the bullet velocity
+        newBullet.GetComponent<Rigidbody>().velocity = newBullet.transform.forward * velocity;
+
+        //Spawn the bullet for other players
+        // NetworkServer.Spawn(newBullet);
+
+        //Destroy the bullet after time passed
+        Destroy(newBullet, 3f);
+    }
+
+    //Players takes damage
+    public void IsDamaged(int damage)
+    {
+        // if (!isServer)
+        // {
+        //     return;
+        // }
+
+        health -= damage;
+
+        Debug.Log("Health " + health);
+        ChangeHealth(health);
+        //If health is equal or lower to 0, the player dies
+        if (health <= 0)
+        {
+            
+            Destroy(gameObject);
+           
+            //CustomNetworkManager.singleton.StopClient();
+            
+        }
+        
+    }
+
+    void ChangeHealth(int health)
+    {
+        healthBar.sizeDelta = new Vector2(health * 20, healthBar.sizeDelta.y);
     }
 
     void LocalMove(float x, float y, float speed)
@@ -157,6 +283,14 @@ public class PlayerController : MonoBehaviour
     {
         Camera.main.GetComponent<PostProcessVolume>().profile.GetSetting<ChromaticAberration>().intensity.value = x;
     }
+
+
+    // private void OnTriggerEnter(Collider collision) {
+    //     Debug.Log(collision.tag);
+    //     // if(collision.tag == "FinishLine"){
+    //     //     Debug.Log("Course completed!");
+    //     // }
+    // }
 
 
 }
