@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class DebrisMulti : MonoBehaviour
+public class SceneryMulti : NetworkBehaviour
 {
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +25,10 @@ public class DebrisMulti : MonoBehaviour
         //If player is not null, it takes damage
         if (player != null)
         {
-            player.IsDamaged(5);
+            player.IsDamaged(damage);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        
     }
 }

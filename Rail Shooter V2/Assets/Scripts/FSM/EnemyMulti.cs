@@ -40,7 +40,7 @@ public class EnemyMulti : NetworkBehaviour
         //If player is not null, it takes damage
         if (player != null)
         {
-            player.IsDamaged(2);
+            player.IsDamaged(25);
         }
 
         Destroy(gameObject);
