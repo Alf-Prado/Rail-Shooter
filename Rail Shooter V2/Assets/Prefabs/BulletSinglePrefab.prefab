@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95e7bb2a5fd310408cf265d1e0e4243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidText: {fileID: 4705062833763347414, guid: 764a7e2725592314cbc013ed5f0b1800,
+    type: 3}
 --- !u!82 &-2572896073258088968
 AudioSource:
   m_ObjectHideFlags: 0
