@@ -11,8 +11,8 @@ public class DebrisSpawnerMulti : NetworkBehaviour
     public GameObject halfCapsule;
     public GameObject antenna;
 
-    int instances = 500;
-    float radius = 500.0f;
+    int instances = 300;
+    float radius = 300.0f;
 
     // Start is called before the first frame update
     public override void OnStartServer()
